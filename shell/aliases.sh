@@ -7,7 +7,7 @@ alias vi="nvim"
 alias act="conda activate"
 alias pips-thu="pip install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 alias hss="history | grep"
-alias pxy="https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890"
+alias pxy="https_proxy=$PROXY_URL http_proxy=$PROXY_URL"
 
 # ai coding
 alias cc="claude"
