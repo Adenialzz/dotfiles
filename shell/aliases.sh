@@ -1,14 +1,16 @@
 alias c="clear"
 alias nv="watch -n -0.5 nvidia-smi"
-alias lt="ls -lrt"
-alias JJ="conda activate JJ_env"
+alias lt="ls -lrth"
 alias py="python"
 alias sc="scala"
 alias vi="nvim"
 alias act="conda activate"
 alias pips-thu="pip install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 alias hss="history | grep"
-alias spo="source $HOME/.config/.mbin/set-proxy"
+alias pxy="https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890"
+
+# ai coding
+alias cc="claude"
 
 # git
 alias gs="git status"
