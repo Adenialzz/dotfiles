@@ -33,7 +33,7 @@ cp .example.env .env
 # 编辑 .env 文件，填写所有空变量
 ```
 
-**重要**：`.env` 文件中所有 `export` 的变量都必须填写值，否则 `run_config.sh` 会报错退出。
+**重要**：`.env` 文件中的变量必须使用 `KEY=value` 格式且都要填写值；如果变量为空，`run_config.sh` 会报错退出。
 
 ### 2. 运行配置脚本
 
