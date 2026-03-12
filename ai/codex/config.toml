@@ -1,18 +1,21 @@
 model = "gpt-5.4"
-[mcp_servers.jina-mcp-server]
-"url" = "https://mcp.jina.ai/v1"
-"bearer_token_env_var" = "JINA_API_KEY"
+# [mcp_servers.jina-mcp-server]
+# "url" = "https://mcp.jina.ai/v1"
+# "bearer_token_env_var" = "JINA_API_KEY"
 
-[mcp_servers.parse_pdf]
-command = "uvx"
-args = ["--from", "git+ssh://git@git.in.zhihu.com/songjunjie/mcp_servers.git", "parse_pdf_mcp"]
+# [mcp_servers.parse_pdf]
+# command = "uvx"
+# args = ["--from", "git+ssh://git@git.in.zhihu.com/songjunjie/mcp_servers.git", "parse_pdf_mcp"]
 
-[mcp_servers.zhihu]
-command = "uvx"
-args = ["--from", "git+ssh://git@git.in.zhihu.com/songjunjie/mcp_servers.git", "zhihu_mcp"]
+# [mcp_servers.zhihu]
+# command = "uvx"
+# args = ["--from", "git+ssh://git@git.in.zhihu.com/songjunjie/mcp_servers.git", "zhihu_mcp"]
 
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
 
 [projects."/Users/zhihu/JJ_Projects/dotfiles"]
+trust_level = "trusted"
+
+[projects."/Users/song/JJ_Projects/leetcode"]
 trust_level = "trusted"
