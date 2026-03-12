@@ -1,39 +1,42 @@
 
 # My Dotfiles
 
-个人系统配置文件仓库。
+个人系统配置文件仓库，包含 AI 工具、Shell 和编辑器相关配置。
 
 ## 目录结构
 
-```
+```text
 dotfiles/
-├── .config/                    # 主要配置目录
-│   ├── shell/                  # shell 配置
-│   │   ├── aliases.sh         # 命令别名
-│   │   ├── funcs.sh           # shell 函数
-│   │   └── settings.sh        # shell 设置
-│   ├── zsh/                    # zsh 特定配置
-│   ├── nvim/                   # Neovim 配置
-│   ├── conda/                  # Conda 配置
-│   └── pip/                    # pip 配置
-├── .env                        # 环境变量（需要自行创建）
+├── ai/                         # AI 工具相关配置
+│   ├── claude/                 # Claude Code 配置
+│   ├── codex/                  # Codex 配置
+│   ├── prompts/                # 共享 prompts
+│   ├── skills/                 # 可复用 skills
+│   └── mcp_config.json         # MCP 配置
+├── config/                     # 用户配置文件
+│   └── nvim/                   # Neovim 配置
+├── shell/                      # Shell 配置
+│   ├── aliases.sh              # 命令别名
+│   ├── funcs.sh                # shell 函数
+│   ├── settings.sh             # shell 设置
+│   └── vi.zsh                  # zsh vi mode 配置
 ├── .example.env                # 环境变量示例
-├── run_config.sh               # 安装配置脚本
-└── README.md
+├── run_config.sh               # 安装和软链接脚本
+└── README.md                   # 仓库说明
 ```
 
 ## 快速开始
 
 ### 1. 配置环境变量
 
-首先复制 `.example.env` 为 `.env` 并填写所有变量：
+先复制 `.example.env` 为 `.env` 并填写变量值：
 
 ```bash
 cp .example.env .env
-# 编辑 .env 文件，填写所有空变量
+# 编辑 .env
 ```
 
-**重要**：`.env` 文件中的变量必须使用 `KEY=value` 格式且都要填写值；如果变量为空，`run_config.sh` 会报错退出。
+`run_config.sh` 会检查 `.env` 中的每个变量是否为空；如果存在空值，会直接退出。
 
 ### 2. 运行配置脚本
 
@@ -42,9 +45,10 @@ bash run_config.sh
 ```
 
 脚本会自动：
-- 检查并加载 `.env` 文件（确保无空变量）
-- 链接配置文件到相应位置
-- 配置 shell rc 文件
+- 检查并加载 `.env` 文件
+- 链接 Claude Code / Codex 相关配置到用户目录
+- 追加 shell 初始化配置到当前 shell 的 rc 文件
+- 处理仓库中的配置文件软链接
 
 ### 3. 应用 shell 配置
 
@@ -59,13 +63,21 @@ source ~/.zshrc  # 或 ~/.bashrc
 `run_config.sh` 会在执行前检查 `.env` 文件：
 - 如果文件不存在 → 报错退出
 - 如果存在空变量 → 报错退出并显示哪些变量为空
-- 所有变量都有值 → source 加载并继续执行
+- 所有变量都有值 → 加载并继续执行
+
+## 说明文档
+
+- `ai/claude/README.md`：Claude Code 配置说明
+- `ai/codex/README.md`：Codex 配置说明
 
 ## Key Files
 
 | 文件 | 用途 |
 |------|------|
-| `run_config.sh` | 将配置链接到 shell rc 文件的安装脚本 |
-| `.config/shell/aliases.sh` | 包含常用别名（git、conda、nvim 等） |
-| `.config/nvim/init.vim` | Neovim 配置，使用 vim-plug 管理插件 |
+| `run_config.sh` | 安装脚本，负责检查 `.env`、创建软链接并追加 shell 配置 |
+| `shell/aliases.sh` | 常用命令别名 |
+| `shell/funcs.sh` | shell 函数 |
+| `shell/settings.sh` | shell 环境设置 |
+| `config/nvim/init.vim` | Neovim 配置 |
+| `ai/prompts/coding_system.md` | Claude / Codex 共享系统提示词 |
 | `.example.env` | 环境变量模板 |

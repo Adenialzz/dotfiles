@@ -3,7 +3,7 @@
 set -eu
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_DIR="$REPO_DIR/.config"
+CONFIG_DIR="$REPO_DIR/config"
 SHELL_NAME=$(basename "$SHELL")
 RCFILE="$HOME/.${SHELL_NAME}rc"
 
