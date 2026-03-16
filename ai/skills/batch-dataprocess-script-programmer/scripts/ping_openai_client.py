@@ -27,7 +27,7 @@ def parse_args():
         "--client",
         required=True,
         choices=sorted(client_configs),
-        help="Preset client name from references/llm_client.json",
+        help="Client name from references/llm_client.json",
     )
     parser.add_argument(
         "--timeout",
@@ -37,17 +37,13 @@ def parse_args():
     )
     args = parser.parse_args()
 
-    preset = client_configs[args.client]
-    args.base_url = preset.get("base_url")
-    args.model = preset.get("model")
-    args.api_key_env = preset.get("env_key")
-
     missing_fields = []
-    if not args.base_url:
+    client_config = client_configs[args.client]
+    if not client_config.get("base_url"):
         missing_fields.append("base_url")
-    if not args.model:
+    if not client_config.get("model"):
         missing_fields.append("model")
-    if not args.api_key_env:
+    if not client_config.get("env_key"):
         missing_fields.append("env_key")
     if missing_fields:
         parser.error(
@@ -60,8 +56,9 @@ def parse_args():
 
 def main():
     args = parse_args()
+    config = load_client_configs()[args.client]
 
-    api_key = os.getenv(args.api_key_env)
+    api_key = os.getenv(config["env_key"])
     if not api_key:
         print(
             json.dumps(
@@ -70,9 +67,10 @@ def main():
                     "error": {
                         "type": "missing_api_key",
                         "message": (
-                            f"Environment variable {args.api_key_env!r} is not set or empty."
+                            f"Environment variable {config['env_key']!r} is not set or empty."
                         ),
                     },
+                    "client": args.client,
                 },
                 ensure_ascii=False,
             )
@@ -99,14 +97,14 @@ def main():
 
     client = OpenAI(
         api_key=api_key,
-        base_url=args.base_url,
+        base_url=config["base_url"],
         timeout=args.timeout,
     )
 
     try:
         response = client.chat.completions.create(
-            model=args.model,
-            messages=[{"role": "user", "content": "Reply with the single word pong."}],
+            model=config["model"],
+            messages=[{"role": "user", "content": "你是谁，你目前是否可用？"}],
             max_tokens=16,
         )
     except Exception as exc:
