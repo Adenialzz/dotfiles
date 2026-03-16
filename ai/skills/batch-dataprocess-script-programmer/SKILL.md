@@ -1,0 +1,69 @@
+---
+name: batch-dataprocess-script-programmer
+description: 当用户要求编写单文件 python 数据处理脚本时使用此技能。
+---
+
+# Python Script Programmer
+
+用户会将一些简单的 Python 单文件数据处理脚本编码任务交给你，以下是一些具体要求，请按照要求实现。如果你认为用户给定的任务与下列要求存在冲突或方案不合理之处，主动提出并于用户探讨合理方案。
+
+## 批量数据处理
+
+### 基础参数选项
+
+一般来说，在编写批量数据处理脚本时，你的实现需要支持以下基础参数选项：
+
+- 支持并发请求，并提供 `--concurrency` 参数来控制并发度
+
+- 支持设置测试条数 `--limit`
+
+- 支持进度条显示（比如用 tqdm），默认开启进度条显示，并提供禁用选项 `--disable-progress-bar`
+
+除了以上基础批量数据处理参数选项之外，你应该根据具体任务，支持其他有必要的参数选项。比如需要调用 llm 时，需要支持 `--model`、`--model-env-key` 等。
+
+### 少批量测试
+
+在编写完批量数据处理脚本后，需要你自己先进行少批量测试。在测试时：
+
+- 使用 `--limit` 参数限制测试条数，一般设置 10 条即可；
+
+- 串行或低并发进行测试，`--concurrency <=2`；
+
+- 如果少批量测试 5min 内仍未完成，考虑减少测试条数或直接返回给用户测试；
+
+- **一定不要**自己跑全量或高并发，务必在写完脚本并少批量测试完成后要求用户检查。不要自己直接运行
+
+## 调用 LLM
+
+如果需要调用 LLM，以下是一些要求。
+
+- 模型提供商一般都会兼容 openai 接口协议，你应该使用 openai 接口协议来实现对 llm 的调用；
+
+- 从 references/llm_client.json 中选择模型
+
+- 不要自行进行高并发测试
+
+## 脚本工具
+
+本 skill 配备了一些常用的工具，方便你进行数据分析和编码。
+
+- `scripts/profile_dataframe.py`
+  - 用于快速理解表格型数据文件的结构；
+  - 适合在写脚本前先看 schema、缺失情况、样例值和候选字段角色；
+  - stdout 输出 JSON 摘要；详细字段说明看 `uv run scripts/profile_dataframe.py --help`。
+
+- `scripts/ping_openai_client.py`
+  - 用于快速验证某个 OpenAI 协议兼容的 LLM endpoint 是否可用；
+  - 示例：`uv run --with openai scripts/ping_openai_client.py --client deepseek-chat`，其中可选 client 见 references/llm_client.json
+  - stdout 输出 JSON，成功时返回响应摘要，失败时返回结构化错误，便于排障。
+
+如果你在分析数据与编码过程中，认为某种工具或操作非常常用，可以向用户建议在本 skill 中抽象封装这类工具，方便你日后的开发。
+
+## 参考文档
+
+以下提供一些常用文档的获取方式，你可以按需读取。
+
+- `references/llm_client.json`
+  - 存放常用 LLM client 的预置配置；
+  - 字段包括 `base_url`、`model`、`env_key`；
+  - 需要快速验证某个 provider 是否可用时，优先读取这份配置并配合 `scripts/ping_openai_client.py --client <name>` 使用。

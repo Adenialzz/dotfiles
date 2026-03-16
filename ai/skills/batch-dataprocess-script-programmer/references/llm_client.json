@@ -1,0 +1,17 @@
+{
+    "deepseek-chat": {
+        "base_url": "https://api.deepseek.com/v1",
+        "model": "deepseek-chat",
+        "env_key": "DEEPSEEK_API_KEY"
+    },
+    "deepseek-reasoner": {
+        "base_url": "https://api.deepseek.com/v1",
+        "model": "deepseek-reasoner",
+        "env_key": "DEEPSEEK_API_KEY"
+    },
+    "kimi-k2.5": {
+        "base_url": "https://api.moonshot.cn/v1",
+        "model": "kimi-k2.5",
+        "env_key": "MOONSHOT_API_KEY"
+    }
+}
