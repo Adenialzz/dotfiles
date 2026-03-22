@@ -4,13 +4,18 @@ alias lt="ls -lrth"
 alias py="python"
 alias sc="scala"
 alias vi="nvim"
-alias act="conda activate"
 alias pips-thu="pip install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 alias hss="history | grep"
-alias pxy="https_proxy=$PROXY_URL http_proxy=$PROXY_URL"
+
+set_proxy="http_proxy=$PROXY_URL https_proxy=$PROXY_URL"
+alias pxy="$set_proxy"
 
 # ai coding
-alias cc="claude"
+alias cc="$set_proxy claude"
+
+alias cx="$set_proxy codex"
+alias cxr="$set_proxy codex resume"
+alias cxc="$set_proxy codex resume --last"
 
 # git
 alias gs="git status"

@@ -1,0 +1,9 @@
+
+python-preference = "managed"
+python-downloads = "manual"
+required-version = ">=0.8"
+
+[[index]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true

@@ -63,7 +63,9 @@ echo "━━━ 检查 .env 文件 ━━━"
 if check_env_file; then
   # shellcheck source=/dev/null
   # source "$ENV_FILE"
-  export $(xargs < .env)
+  set -a
+  source .env
+  set +a
   echo "✅ .env 文件加载成功"
 else
   exit 1
@@ -192,12 +194,10 @@ link_files_recursive "$REPO_DIR/ai/skills" "$HOME/.agents/skills"
 
 
 
-# 2. 配置 .config 目录
-if [ -d "$CONFIG_DIR" ]; then
-  echo "━━━ 配置 .config ━━━"
-  link_files_recursive "$CONFIG_DIR" "$HOME/.config"
-  echo
-fi
+# 2. 配置 zed、uv etc.
+echo "━━━ 配置 .config ━━━"
+link_files_recursive "$REPO_DIR/zed" "$HOME/.config/zed"
+echo
 
 # 3. 配置 shell rc 文件
 echo "━━━ 配置 shell rc ━━━"
