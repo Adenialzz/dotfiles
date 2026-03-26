@@ -1,0 +1,11 @@
+prefix_rule(
+  pattern = ["python"],
+  decision = "forbidden",
+  justification = "Do not run python directly. Use uv run instead.",
+)
+
+prefix_rule(
+  pattern = ["python3"],
+  decision = "forbidden",
+  justification = "Do not run python3 directly. Use uv run instead.",
+)
