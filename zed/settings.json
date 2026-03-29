@@ -7,7 +7,36 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "ssh_connections": [],
+  "buffer_font_family": ".ZedMono",
+  "disable_ai": true,
+  "ssh_connections": [
+    {
+      "host": "10.225.163.105.pek02",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/jeeves/JJ_Projects/github/dotfiles"
+          ]
+        },
+        {
+          "paths": [
+            "/home/jeeves/JJ_Projects/songjunjie/vlpt"
+          ]
+        },
+        {
+          "paths": [
+            "/home/jeeves/JJ_Projects/songjunjie/zagent"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "10.203.193.99.pek02",
+      "args": [],
+      "projects": []
+    }
+  ],
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "never",

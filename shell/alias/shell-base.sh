@@ -10,17 +10,6 @@ alias hss="history | grep"
 set_proxy="http_proxy=$PROXY_URL https_proxy=$PROXY_URL"
 alias pxy="$set_proxy"
 
-# ai coding
-alias cc="$set_proxy claude"
-
-alias cx="$set_proxy codex"
-alias cxr="$set_proxy codex resume"
-alias cxc="$set_proxy codex resume --last"
-
-# git
-alias gs="git status"
-alias gd="git diff"
-
 RCFILE=$HOME/.`basename ${SHELL}`rc
 alias ss="source $RCFILE"
 
