@@ -1,13 +1,18 @@
 model = "gpt-5.4"
 
+
 # sandbox_mode = "danger-full-access"
 # approval_policy = "never"
-
+#
+# 避免把 bashrc 中的一些语句（比如 export http_prxoy=""）带到 codex 沙盒环境初始化。造成内部服务测试失败
 allow_login_shell = false
+#
+# 好像必须绝对路径
+notify = ["/usr/bin/python3", "/home/jeeves/.adenialzz/scripts/send_wecom_message.py"]
 
 [shell_environment_policy]
 inherit = "all"
-exclude = ["http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY"]
+exclude = ["http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY", "*_KEY"]
 
 
 [notice.model_migrations]
