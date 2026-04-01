@@ -1,0 +1,4 @@
+interface:
+  display_name: "Profile Dataframe"
+  short_description: "快速剖析表格数据结构、字段角色、空值与基础统计摘要"
+  default_prompt: "Use $profile-dataframe to inspect this dataframe-like file before designing the processing script."
