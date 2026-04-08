@@ -13,5 +13,30 @@
         "base_url": "https://api.moonshot.cn/v1",
         "model": "kimi-k2.5",
         "env_key": "MOONSHOT_API_KEY"
+    },
+    "open_mllm": {
+        "base_url": "http://open-mllm.jeeves-agi.klara-sjhl.pek02.rack.zhihu.com/v1",
+        "model": "/mnt/models",
+        "env_key": "EMPTY_API_KEY"
+    },
+    "doubao-1.8": {
+        "base_url": "https://ark.cn-beijing.volces.com/api/v3",
+        "model": "ep-20260106114234-9f4sd",
+        "env_key": "DOUBAO_ARK_API_KEY",
+        "extra_body": {
+            "thinking": {
+                "type": "disabled"
+            }
+        }
+    },
+    "doubao-1.6": {
+        "base_url": "https://ark.cn-beijing.volces.com/api/v3",
+        "model": "ep-20251106102124-l2hhf",
+        "env_key": "DOUBAO_ARK_API_KEY",
+        "extra_body": {
+            "thinking": {
+                "type": "disabled"
+            }
+        }
     }
 }

@@ -1,4 +1,11 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = [
+#   "pandas",
+#   "openpyxl",
+#   "xlrd",
+#   "pyarrow",
+# ]
+# ///
 
 import argparse
 import json

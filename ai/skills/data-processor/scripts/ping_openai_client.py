@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = [
+#   "openai",
+# ]
+# ///
 
 import argparse
 import json
