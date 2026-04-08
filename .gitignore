@@ -6,3 +6,5 @@ coc/
 
 ai/skills/.system/
 ai/skills/zhihu-service/
+
+.DS_Store

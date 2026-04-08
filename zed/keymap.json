@@ -1,31 +1,36 @@
 [
-    {
-        "context": "Workspace",
-        "bindings": {
-            "cmd-alt-j": "vim::ResizePaneDown",
-            "cmd-alt-k": "vim::ResizePaneUp"
-        }
+  {
+    "bindings": {
+      "cmd-e": "project_panel::ToggleFocus",
     },
-    {
-        "context": "(vim_mode == normal || vim_mode == visual) && !menu",
-        "bindings": {
-            "ctrl-j": ["workspace::SendKeystrokes", "7 j"],
-            "ctrl-k": ["workspace::SendKeystrokes", "7 k"],
-
-            "ctrl-o": "pane::GoToOlderTag",
-            "ctrl-i": "pane::GoToNewerTag",
-
-            "g d": "editor::GoToDefinition",
-            "g D": "editor::GoToDeclaration",
-            "g y": "editor::GoToTypeDefinition",
-            "g I": "editor::GoToImplementation",
-            "g r": "editor::FindAllReferences"
-        }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-alt-j": "vim::ResizePaneDown",
+      "cmd-alt-k": "vim::ResizePaneUp",
     },
-    {
-        "context": "Terminal",
-        "bindings": {
-            "shift-enter": ["terminal::SendText", "\u001b\r"]
-        }
-    }
+  },
+  {
+    "context": "(vim_mode == normal || vim_mode == visual) && !menu",
+    "bindings": {
+      "shift-h": ["workspace::SendKeystrokes", "^"],
+      "shift-l": ["workspace::SendKeystrokes", "$"],
+      "ctrl-j": ["workspace::SendKeystrokes", "7 j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "7 k"],
+      "ctrl-o": "pane::GoToOlderTag",
+      "ctrl-i": "pane::GoToNewerTag",
+      "g d": "editor::GoToDefinition",
+      "g D": "editor::GoToDeclaration",
+      "g y": "editor::GoToTypeDefinition",
+      "g I": "editor::GoToImplementation",
+      "g r": "editor::FindAllReferences",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "shift-enter": ["terminal::SendText", "\u001b\r"],
+    },
+  },
 ]
