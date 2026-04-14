@@ -63,7 +63,6 @@ check_env_file() {
 echo "━━━ 检查 .env 文件 ━━━"
 if check_env_file; then
   # shellcheck source=/dev/null
-  # source "$ENV_FILE"
   set -a
   source "$ENV_FILE"
   set +a
@@ -213,8 +212,8 @@ source $REPO_DIR/shell/settings.sh
 source $REPO_DIR/shell/alias/shell-base.sh
 source $REPO_DIR/shell/alias/git.sh
 source $REPO_DIR/shell/alias/tmux.sh
-source $REPO_DIR/shell/alias/coding-agents.sh
 source $REPO_DIR/shell/funcs.sh
+source $REPO_DIR/shell/alias/coding-agents.sh
 if [ "\$(basename \$SHELL)" = zsh ]; then
 	source $REPO_DIR/shell/vi.zsh
 fi

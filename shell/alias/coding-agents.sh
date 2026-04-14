@@ -1,5 +1,5 @@
-alias cc="$set_proxy claude"
+alias cc="pxy claude"
 
-alias cx="$set_proxy codex"
-alias cxr="$set_proxy codex resume"
-alias cxc="$set_proxy codex resume --last"
+alias cx="pxy codex"
+alias cxr="pxy codex resume"
+alias cxc="pxy codex resume --last"

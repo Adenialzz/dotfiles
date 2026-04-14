@@ -7,9 +7,6 @@ alias vi="nvim"
 alias pips-thu="pip install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 alias hss="history | grep"
 
-set_proxy="http_proxy=$PROXY_URL https_proxy=$PROXY_URL"
-alias pxy="$set_proxy"
-
 RCFILE=$HOME/.`basename ${SHELL}`rc
 alias ss="source $RCFILE"
 
