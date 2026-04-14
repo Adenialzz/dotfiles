@@ -2,7 +2,8 @@
 
 set -eu
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 CONFIG_DIR="$REPO_DIR/config"
 SHELL_NAME=$(basename "$SHELL")
 RCFILE="$HOME/.${SHELL_NAME}rc"
@@ -64,7 +65,7 @@ if check_env_file; then
   # shellcheck source=/dev/null
   # source "$ENV_FILE"
   set -a
-  source .env
+  source "$ENV_FILE"
   set +a
   echo "✅ .env 文件加载成功"
 else

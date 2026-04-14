@@ -26,7 +26,14 @@ description: 基于 references/ 中的表文档编写并执行只读 Hive SQL。
 - 查大表时先缩小日期分区和样本范围。
 - 需要跨表时，先确认两侧粒度和 join key 再动手。
 
-## Script
+## Add a new table
+
+- 用户要求你新增一张表时，会给你提供你一些原始表结构信息，你需要对其进行整理并保存在 `references/` 目录下；
+- 新表可以直接从 `references/tables_template.md` 复制模板补充。
+- 每张表至少记录：全名、粒度、主键或唯一键、分区字段、常用过滤条件、常见 join key、口径 caveat、示例 SQL。
+- 如果用户提供的信息不完整，你可以主动询问相关信息
+
+## Scripts
 
 `query_hive.py` hive sql 查询
 
@@ -40,7 +47,4 @@ uv run scripts/query_hive.py --file /path/to/query.sql --format tsv --output /tm
 
 ## References
 
-- 把表信息放到 `references/`，优先按主题拆文件，避免单个文件过大。
-- 每张表至少记录：全名、粒度、主键或唯一键、分区字段、常用过滤条件、常见 join key、口径 caveat、示例 SQL。
-- 当前整理好的表文档放在 `references/`。
-- 新表可以直接从 `references/tables_template.md` 复制模板补充。
+- 表信息存放在 `references/`
