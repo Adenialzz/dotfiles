@@ -1,0 +1,4 @@
+interface:
+    display_name: "Hive Query"
+    short_description: "基于 references 编写并执行只读 Hive 查询"
+    default_prompt: "Use $hive-query to read the table docs in references/ and run a safe read-only Hive query for my metric question."

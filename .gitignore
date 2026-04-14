@@ -6,5 +6,8 @@ coc/
 
 ai/skills/.system/
 ai/skills/zhihu-service/
+ai/skills/hive-query/scripts/.env
+ai/skills/hive-query/references/*
+!ai/skills/hive-query/references/tables_template.md
 
 .DS_Store
