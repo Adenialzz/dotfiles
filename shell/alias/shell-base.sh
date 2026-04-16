@@ -6,6 +6,7 @@ alias sc="scala"
 alias vi="nvim"
 alias pips-thu="pip install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 alias hss="history | grep"
+alias pxy='http_proxy="$PROXY_URL" https_proxy="$PROXY_URL"'
 
 RCFILE=$HOME/.`basename ${SHELL}`rc
 alias ss="source $RCFILE"

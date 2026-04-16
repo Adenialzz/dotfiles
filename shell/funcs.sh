@@ -12,12 +12,3 @@ function git_file_count() {
       printf "%-10s %d\n", e, cnt[e]
   }'
 }
-
-function pxy {
-  [ "$#" -eq 0 ] && return 0
-  http_proxy="$PROXY_URL" \
-  https_proxy="$PROXY_URL" \
-  HTTP_PROXY="$PROXY_URL" \
-  HTTPS_PROXY="$PROXY_URL" \
-  "$@"
-}
