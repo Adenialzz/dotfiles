@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Experience Reuse"
+  short_description: "沉淀项目经验并检索复用历史方案"
+  default_prompt: "Use $project-experience-reuse to document a project incident and search similar historical experiences before proposing fixes."
