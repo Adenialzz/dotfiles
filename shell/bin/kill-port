@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+port="${1:?用法: kill-port <端口>}"
+
+mapfile -t pids < <(
+    lsof -t -iTCP:"$port" -sTCP:LISTEN | sort -u
+)
+
+if ((${#pids[@]} == 0)); then
+    echo "端口 $port 没有监听进程"
+    exit 0
+fi
+
+pid_list=$(IFS=,; echo "${pids[*]}")
+ps -o pid,ppid,user,cmd -p "$pid_list"
+
+read -r -p "终止以上进程？[y/N] " answer
+[[ "$answer" =~ ^[Yy]$ ]] || exit 0
+
+kill "${pids[@]}"
+sleep 3
+
+mapfile -t remaining < <(
+    lsof -t -iTCP:"$port" -sTCP:LISTEN | sort -u
+)
+
+if ((${#remaining[@]} == 0)); then
+    echo "端口 $port 已释放"
+    exit 0
+fi
+
+echo "端口仍被以下进程占用：${remaining[*]}"
+read -r -p "使用 SIGKILL 强制终止？[y/N] " answer
+[[ "$answer" =~ ^[Yy]$ ]] || exit 1
+
+kill -9 "${remaining[@]}"
+echo "已发送 SIGKILL"
