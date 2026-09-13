@@ -20,7 +20,11 @@ export DEEPSEEK_API_KEY='你的 API Key'
 codex -p deepseek
 ```
 
-如需持久化，请将变量导出放入本机私有 shell 配置，不要将真实 Key 提交到仓库。此 profile 关闭内置网页搜索，保留基础配置中的其他设置；不会修改主配置或官方登录凭据，也不会切换已打开的桌面端会话。
+如需持久化，请将变量导出放入本机私有 shell 配置，不要将真实 Key 提交到仓库。此 profile 关闭内置网页搜索，保留基础配置中的其他设置，不会切换已打开的桌面端会话。
+
+Profile 只覆盖本次配置，不隔离登录凭据。DeepSeek 通过 provider 的 `env_key` 认证，无需设置 `forced_login_method = "api"`；该设置会在已有 ChatGPT 登录时触发登出，因此不要在此 profile 或基础配置中添加它。
+
+如果旧版配置已导致登出，先更新此 profile，再运行不带 profile 的 `codex login` 恢复官方登录。
 
 `deepseek-models.json` 来自 DeepSeek 接入文档，保留其模型元数据及 agent 提示词；更新时从该文档同步。
 
