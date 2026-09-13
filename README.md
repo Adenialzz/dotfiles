@@ -14,6 +14,8 @@ dotfiles/
 │   ├── codex/                  # Codex 配置
 │   │   ├── README.md           # Codex 配置说明
 │   │   ├── config.toml         # Codex 主配置
+│   │   ├── deepseek.config.toml # DeepSeek profile
+│   │   ├── deepseek-models.json # DeepSeek 模型目录
 │   │   └── rules/              # Codex rules
 │   ├── prompts/                # 共享 prompts
 │   │   └── coding_system.md    # Claude / Codex 共享 system prompt
@@ -41,7 +43,7 @@ dotfiles/
 ├── tmux/                       # tmux 配置
 │   └── .tmux.conf              # tmux 基础配置
 ├── .example.env                # 环境变量示例
-├── run_config.sh               # 安装和软链接脚本
+├── scripts/run.sh              # 安装和软链接脚本
 └── README.md                   # 仓库说明
 ```
 
@@ -64,12 +66,12 @@ cp .example.env .env
 # 编辑 .env
 ```
 
-`run_config.sh` 会检查 `.env` 中的每个变量是否为空；如果存在空值，会直接退出。
+`scripts/run.sh` 会检查 `.env` 中的每个变量是否为空；如果存在空值，会直接退出。
 
 ### 2. 运行配置脚本
 
 ```bash
-bash run_config.sh
+bash scripts/run.sh
 ```
 
 脚本会自动：
@@ -89,7 +91,7 @@ source ~/.zshrc  # 或 ~/.bashrc
 
 `.env` 文件用于存放敏感信息和个性化配置，不会被提交到 git。必须包含所有在 `.example.env` 中定义的变量，且不能留空。
 
-`run_config.sh` 会在执行前检查 `.env` 文件：
+`scripts/run.sh` 会在执行前检查 `.env` 文件：
 - 如果文件不存在 → 报错退出
 - 如果存在空变量 → 报错退出并显示哪些变量为空
 - 所有变量都有值 → 加载并继续执行
@@ -103,7 +105,7 @@ source ~/.zshrc  # 或 ~/.bashrc
 
 | 文件 | 用途 |
 |------|------|
-| `run_config.sh` | 安装脚本，负责检查 `.env`、创建软链接并追加 shell 配置 |
+| `scripts/run.sh` | 安装脚本，负责检查 `.env`、创建软链接并追加 shell 配置 |
 | `shell/alias/` | 按主题拆分的 shell 别名配置 |
 | `shell/funcs.sh` | shell 函数 |
 | `shell/settings.sh` | shell 环境设置 |

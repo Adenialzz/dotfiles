@@ -189,6 +189,8 @@ link_files_recursive "$REPO_DIR/ai/skills" "$HOME/.claude/skills"
 mkdir -p "$HOME/.codex"
 mkdir -p "$HOME/.agents"
 safe_symlink "$REPO_DIR/ai/codex/config.toml" "$HOME/.codex/config.toml"
+safe_symlink "$REPO_DIR/ai/codex/deepseek.config.toml" "$HOME/.codex/deepseek.config.toml"
+safe_symlink "$REPO_DIR/ai/codex/deepseek-models.json" "$HOME/.codex/deepseek-models.json"
 safe_symlink "$REPO_DIR/ai/prompts/coding_system.md" "$HOME/.codex/AGENTS.md"
 link_files_recursive "$REPO_DIR/ai/skills" "$HOME/.agents/skills"
 
