@@ -37,6 +37,8 @@ dotfiles/
 │   │   ├── git.sh              # Git 别名
 │   │   ├── tmux.sh             # tmux 别名
 │   │   └── coding-agents.sh    # Claude / Codex 别名
+│   ├── init.sh                 # Shell 统一加载入口
+│   ├── bin/                    # 链接到 ~/.config/.mbin
 │   ├── funcs.sh                # shell 函数
 │   ├── settings.sh             # shell 设置
 │   └── vi.zsh                  # zsh vi mode 配置
@@ -57,16 +59,16 @@ bash scripts/install.sh
 
 脚本会按系统安装 `jq`、`codex`、`claude code`、`neovim`、`tmux`。
 
-### 1. 配置环境变量
+### 1. 配置环境变量（可选）
 
-先复制 `.example.env` 为 `.env` 并填写变量值：
+需要代理或 API Key 时，复制 `.example.env` 为 `.env` 并填写所需变量：
 
 ```bash
 cp .example.env .env
 # 编辑 .env
 ```
 
-`scripts/run.sh` 会检查 `.env` 中的每个变量是否为空；如果存在空值，会直接退出。
+安装不依赖 `.env`，未使用的变量可以留空。
 
 ### 2. 运行配置脚本
 
@@ -75,11 +77,13 @@ bash scripts/run.sh
 ```
 
 脚本会自动：
-- 检查并加载 `.env` 文件
 - 链接 Claude Code / Codex 相关配置到用户目录
+- 将包含 `SKILL.md` 的每个 skill 目录链接到 `~/.claude/skills/` 和 `~/.agents/skills/`
+- 链接 Zed 配置、`uv/uv.toml` 和 `shell/bin`
 - 链接 tmux 配置到 `~/.tmux.conf`
-- 追加 shell 初始化配置到当前 shell 的 rc 文件
-- 处理仓库中的配置文件软链接
+- 在 Bash / Zsh 的 rc 文件中维护一行 `source "仓库路径/shell/init.sh"`
+
+重复运行会跳过正确的链接和已有入口。迁移旧版生成的 Shell 初始化块前会备份 rc 文件；将旧 skill 目录改为软链接前也会备份原目录，其他工具安装的 skill 保留。skill 内部增删文件立即生效，新增整个 skill 时需重跑安装。
 
 ### 3. 应用 shell 配置
 
@@ -89,12 +93,9 @@ source ~/.zshrc  # 或 ~/.bashrc
 
 ## .env 文件说明
 
-`.env` 文件用于存放敏感信息和个性化配置，不会被提交到 git。必须包含所有在 `.example.env` 中定义的变量，且不能留空。
+`.env` 文件用于存放敏感信息和个性化配置，不会被提交到 git。`shell/init.sh` 在文件存在时加载并导出其中的变量；文件缺失或变量为空不会阻止安装。所需变量由实际使用它的功能检查，例如 DeepSeek 启动时需要 `DEEPSEEK_API_KEY`。
 
-`scripts/run.sh` 会在执行前检查 `.env` 文件：
-- 如果文件不存在 → 报错退出
-- 如果存在空变量 → 报错退出并显示哪些变量为空
-- 所有变量都有值 → 加载并继续执行
+`.env` 使用 Shell 赋值语法，例如 `DEEPSEEK_API_KEY='你的 API Key'`。修改后重新加载 Shell 配置即可。新增 alias 或函数的加载语句统一放在 `shell/init.sh`，无需修改 rc 文件。
 
 ## 说明文档
 
@@ -105,7 +106,8 @@ source ~/.zshrc  # 或 ~/.bashrc
 
 | 文件 | 用途 |
 |------|------|
-| `scripts/run.sh` | 安装脚本，负责检查 `.env`、创建软链接并追加 shell 配置 |
+| `scripts/run.sh` | 安装脚本，负责创建软链接并维护 Shell 加载入口 |
+| `shell/init.sh` | 加载可选 `.env`、Shell 设置、alias 和函数 |
 | `shell/alias/` | 按主题拆分的 shell 别名配置 |
 | `shell/funcs.sh` | shell 函数 |
 | `shell/settings.sh` | shell 环境设置 |
