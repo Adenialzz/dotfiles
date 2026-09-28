@@ -16,6 +16,21 @@ from pathlib import Path
 # 配置
 # ============================================================
 
+def load_codex_env():
+    path = Path.home() / ".codex" / "codex.env"
+    if not path.exists():
+        return
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip())
+
+
+load_codex_env()
+
 LONG_TASK_SECONDS = int(
     os.environ.get("CODEX_REMINDER_TASK_SECONDS", "600")
 )
@@ -523,4 +538,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

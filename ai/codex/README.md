@@ -2,11 +2,27 @@
 
 运行仓库根目录的 `bash scripts/run.sh`，将本目录的 `config.toml`、`deepseek.config.toml`、`deepseek-models.json`、`hooks.json` 和 `hooks/` 下的脚本软链接到 `~/.codex/` 对应位置。仓库保存源文件，已有本地文件会先备份再替换为软链接。
 
+## Codex 环境变量
+
+`codex.env` 统一存放供 Codex 相关脚本使用的本机环境变量。目前由长任务提醒 hook 主动读取；其他脚本使用时也需要显式加载，本仓库尚未配置 Codex 主进程的自动加载入口。
+
+在仓库中创建 `ai/codex/codex.env`，填写飞书机器人地址，然后运行 `bash scripts/run.sh` 将其软链接到 `~/.codex/codex.env`：
+
+```dotenv
+CODEX_REMINDER_TASK_SECONDS=600
+CODEX_REMINDER_IDLE_SECONDS=300
+FEISHU_WEBHOOK=https://open.feishu.cn/open-apis/bot/v2/hook/xxx
+```
+
+脚本启动时主动读取该文件，不依赖终端环境变量的继承。配置优先级为：进程已有环境变量 > `codex.env` > 默认值。文件使用简单的 `KEY=VALUE` 格式，不加引号或 `export`；忽略空行和以 `#` 开头的注释。文件缺失时继续使用环境变量和默认值。
+
+`ai/codex/codex.env` 的源文件保存在仓库目录中，但已加入 `.gitignore`，不提交本机私有配置；安装脚本仅在该文件存在时建立软链接。
+
 ## 长任务提醒
 
 `hooks.json` 在 `UserPromptSubmit` 和 `Stop` 时调用 `hooks/long_task_reminder.py`。默认任务耗时达到 10 分钟，且完成后 5 分钟内同一会话没有新指令时，通过飞书机器人发送提醒；新指令会取消该会话尚未发送的提醒。
 
-启动 Codex 前，在本机私有 Shell 配置或仓库未纳入版本控制的 `.env` 中导出 `FEISHU_WEBHOOK`。提醒包含工作目录与最后回复的前 1000 个字符。可通过 `CODEX_REMINDER_TASK_SECONDS` 和 `CODEX_REMINDER_IDLE_SECONDS` 调整任务耗时阈值和等待时间，单位为秒，默认分别为 `600` 和 `300`。
+两个阈值单位为秒，默认分别为 `600` 和 `300`。提醒包含工作目录与最后回复的前 1000 个字符。启动日志中的 `task_threshold`、`idle_threshold` 和 `feishu_configured` 可用于确认配置加载情况。
 
 Hook 命令使用系统 `python3`，脚本仅依赖标准库。运行状态保存在 `~/.codex/reminder-state/`，日志保存在 `~/.codex/reminder.log`，均不迁入仓库。
 

@@ -2,6 +2,7 @@
 coc/
 
 .env
+ai/codex/codex.env
 
 
 ai/skills/.system/
