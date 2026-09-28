@@ -164,6 +164,8 @@ mkdir -p "$HOME/.agents"
 safe_symlink "$REPO_DIR/ai/codex/config.toml" "$HOME/.codex/config.toml"
 safe_symlink "$REPO_DIR/ai/codex/deepseek.config.toml" "$HOME/.codex/deepseek.config.toml"
 safe_symlink "$REPO_DIR/ai/codex/deepseek-models.json" "$HOME/.codex/deepseek-models.json"
+safe_symlink "$REPO_DIR/ai/codex/hooks.json" "$HOME/.codex/hooks.json"
+link_files_recursive "$REPO_DIR/ai/codex/hooks" "$HOME/.codex/hooks"
 safe_symlink "$REPO_DIR/ai/prompts/coding_system.md" "$HOME/.codex/AGENTS.md"
 link_skills "$HOME/.agents/skills"
 

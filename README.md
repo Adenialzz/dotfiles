@@ -16,6 +16,8 @@ dotfiles/
 │   │   ├── config.toml         # Codex 主配置
 │   │   ├── deepseek.config.toml # DeepSeek profile
 │   │   ├── deepseek-models.json # DeepSeek 模型目录
+│   │   ├── hooks.json          # Codex hooks 配置
+│   │   ├── hooks/              # 长任务提醒脚本
 │   │   └── rules/              # Codex rules
 │   ├── prompts/                # 共享 prompts
 │   │   └── coding_system.md    # Claude / Codex 共享 system prompt

@@ -1,6 +1,14 @@
 # Codex 配置
 
-运行仓库根目录的 `bash scripts/run.sh`，将本目录的 `config.toml`、`deepseek.config.toml` 和 `deepseek-models.json` 软链接到 `~/.codex/`。
+运行仓库根目录的 `bash scripts/run.sh`，将本目录的 `config.toml`、`deepseek.config.toml`、`deepseek-models.json`、`hooks.json` 和 `hooks/` 下的脚本软链接到 `~/.codex/` 对应位置。仓库保存源文件，已有本地文件会先备份再替换为软链接。
+
+## 长任务提醒
+
+`hooks.json` 在 `UserPromptSubmit` 和 `Stop` 时调用 `hooks/long_task_reminder.py`。默认任务耗时达到 10 分钟，且完成后 5 分钟内同一会话没有新指令时，通过飞书机器人发送提醒；新指令会取消该会话尚未发送的提醒。
+
+启动 Codex 前，在本机私有 Shell 配置或仓库未纳入版本控制的 `.env` 中导出 `FEISHU_WEBHOOK`。提醒包含工作目录与最后回复的前 1000 个字符。可通过 `CODEX_REMINDER_TASK_SECONDS` 和 `CODEX_REMINDER_IDLE_SECONDS` 调整任务耗时阈值和等待时间，单位为秒，默认分别为 `600` 和 `300`。
+
+Hook 命令使用系统 `python3`，脚本仅依赖标准库。运行状态保存在 `~/.codex/reminder-state/`，日志保存在 `~/.codex/reminder.log`，均不迁入仓库。
 
 ## 选择模型后端
 
