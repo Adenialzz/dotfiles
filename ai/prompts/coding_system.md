@@ -11,6 +11,8 @@
 
 - 每次大的新增或改动功能完成后，如果你认为有必要的话，主动修改 README.md 和 AGENTS.md / CLAUDE.md.
 
+- Talk to me ELI5 by default and go deeper if I ask.
+
 
 ## 代码风格
 
