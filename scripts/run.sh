@@ -172,6 +172,13 @@ link_files_recursive "$REPO_DIR/ai/codex/hooks" "$HOME/.codex/hooks"
 safe_symlink "$REPO_DIR/ai/prompts/coding_system.md" "$HOME/.codex/AGENTS.md"
 link_skills "$HOME/.agents/skills"
 
+# 1.3 antigravity
+mkdir -p "$HOME/.gemini/config"
+safe_symlink "$REPO_DIR/ai/prompts/coding_system.md" "$HOME/.gemini/config/GEMINI.md"
+safe_symlink "$REPO_DIR/ai/mcp_config.json" "$HOME/.gemini/config/mcp_config.json"
+safe_symlink "$REPO_DIR/ai/antigravity/hooks.json" "$HOME/.gemini/config/hooks.json"
+link_files_recursive "$REPO_DIR/ai/antigravity/hooks" "$HOME/.gemini/config/hooks"
+
 
 
 # 2. 配置 zed、uv etc.

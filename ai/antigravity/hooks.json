@@ -1,0 +1,32 @@
+{
+  "enforce-uv-python": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.gemini/config/hooks/enforce-uv-python.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "long-task-reminder": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python3 ~/.gemini/config/hooks/long_task_reminder.py",
+        "timeout": 5
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 ~/.gemini/config/hooks/long_task_reminder.py",
+        "timeout": 5
+      }
+    ]
+  }
+}

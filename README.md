@@ -8,6 +8,10 @@
 ```text
 dotfiles/
 ├── ai/                         # AI 工具相关配置
+│   ├── antigravity/            # Antigravity 配置
+│   │   ├── README.md           # Antigravity 配置说明
+│   │   ├── hooks.json          # Antigravity hooks 配置
+│   │   └── hooks/              # uv 检查与长任务提醒脚本
 │   ├── claude/                 # Claude Code 配置
 │   │   ├── README.md           # Claude 配置说明
 │   │   └── settings.json       # Claude settings
@@ -79,7 +83,7 @@ bash scripts/run.sh
 ```
 
 脚本会自动：
-- 链接 Claude Code / Codex 相关配置到用户目录
+- 链接 Claude Code / Codex / Antigravity 相关配置到用户目录
 - 将包含 `SKILL.md` 的每个 skill 目录链接到 `~/.claude/skills/` 和 `~/.agents/skills/`
 - 链接 Zed 配置、`uv/uv.toml` 和 `shell/bin`
 - 链接 tmux 配置到 `~/.tmux.conf`
@@ -101,6 +105,7 @@ source ~/.zshrc  # 或 ~/.bashrc
 
 ## 说明文档
 
+- `ai/antigravity/README.md`：Antigravity 配置说明
 - `ai/claude/README.md`：Claude Code 配置说明
 - `ai/codex/README.md`：Codex 配置说明
 
@@ -115,5 +120,5 @@ source ~/.zshrc  # 或 ~/.bashrc
 | `shell/settings.sh` | shell 环境设置 |
 | `tmux/.tmux.conf` | tmux 基础配置 |
 | `config/nvim/init.vim` | Neovim 配置 |
-| `ai/prompts/coding_system.md` | Claude / Codex 共享系统提示词 |
+| `ai/prompts/coding_system.md` | Claude / Codex / Antigravity 共享系统提示词 |
 | `.example.env` | 环境变量模板 |
